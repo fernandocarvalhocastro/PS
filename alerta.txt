@@ -1,0 +1,21 @@
+@IBAction func escolherRota(_ sender: Any) {
+        let alerta = UIAlertController(title: "Forma para receber a rota",
+            message: "Faça sua escolha",
+            preferredStyle: .actionSheet)
+        
+        alerta.addAction(UIAlertAction(
+            title: "SMS",
+            style: UIAlertActionStyle.default,
+            handler: {action in self.lblRota.text = action.title}))
+        
+        alerta.addAction(UIAlertAction(
+            title: "E-mail",
+            style: UIAlertActionStyle.default,
+            handler: {action in self.lblRota.text = action.title}))
+        
+        alerta.addAction(UIAlertAction(
+            title: "Cancelar",
+            style: UIAlertActionStyle.default,
+            handler: nil))
+        
+        present(alerta, animated: true, completion: nil)

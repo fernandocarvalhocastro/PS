@@ -1,0 +1,52 @@
+
+//  ViewController.swift
+//  Exemplo1_WebView_Swift
+
+
+import UIKit
+
+class ViewController: UIViewController, UIWebViewDelegate {
+
+    let URL_PAGINA = "http://www.uol.com.br"
+    @IBOutlet weak var meuWebView: UIWebView!
+    @IBOutlet weak var meuActivity:UIActivityIndicatorView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        meuActivity.startAnimating()
+        meuWebView.delegate = self
+        
+        let URL_OK = URL(string: URL_PAGINA)
+        let request = URLRequest(url: URL_OK!)
+        meuWebView.loadRequest(request)
+        meuActivity.hidesWhenStopped = true
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        var msg:String
+        msg = "Erro: \(error.localizedDescription))"
+        
+        let alerta = UIAlertController(
+            title: "Aviso",
+            message: msg,
+            preferredStyle: UIAlertControllerStyle.alert)
+        
+        alerta.addAction(UIAlertAction(
+            title: "OK",
+            style: UIAlertActionStyle.default,
+            handler: nil))
+        
+        present(alerta, animated: true, completion: nil)
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        meuActivity.stopAnimating()
+    }
+
+}
+
